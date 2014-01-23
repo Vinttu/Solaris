@@ -2,8 +2,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>Solaris</groupId>
-    <artifactId>Solaris</artifactId>
+    <groupId>solaris</groupId>
+    <artifactId>solaris</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -45,19 +45,7 @@
                 <artifactId>pitest-maven</artifactId>
                 <version>0.30</version>
             </plugin>
-            <plugin>
-                <groupId>org.pitest</groupId>
-                <artifactId>pitest-maven</artifactId>
-                <version>0.30</version>
-                <configuration>
-                    <targetClasses>
-                        <param>Solaris.Sijainti.Sijainti*</param>
-                    </targetClasses>
-                    <targetTests>
-                        <param>Solaris.Sijainti.Sijainti*</param>
-                    </targetTests>
-                </configuration>
-            </plugin>
+            
         </plugins>
     </build>
 </project>

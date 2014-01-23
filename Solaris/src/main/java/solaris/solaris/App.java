@@ -1,14 +1,14 @@
 package solaris.solaris;
 
-import Paivamaara.Paivamaara;
-import Laskurit.Laskuri;
-import Sijainti.Sijainti;
-import Sijainti.SijaintiLista;
+import solaris.paivamaara.Paivamaara;
+import solaris.laskurit.Laskuri;
+
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 
 import java.util.Scanner;
+import solaris.sijainti.Sijainti;
 
 public class App {
 
