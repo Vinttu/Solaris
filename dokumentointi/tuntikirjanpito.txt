@@ -3,3 +3,4 @@ Tuntikirjanpito
 10.1 75min suunnittelu/tehtävä 1
 19.1 120min suunnittelu/taustatyö/koodauksen aloittaminen
 21.1 90min koodauksen kertaamista/koodausta
+22.1 300min koodausta ja testausta, samalla vanhan kertaamista
