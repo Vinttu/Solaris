@@ -30,6 +30,6 @@ public class Paivamaara {
 
     public String toGMTString(){
     
-    return "Antamasi päivä on: " + this.paivamaara.toGMTString();
+    return "Päivämäärä: " + this.paivamaara.getDate()+ "." + this.paivamaara.getMonth() +"."+ this.paivamaara.getYear();
     }
 }
