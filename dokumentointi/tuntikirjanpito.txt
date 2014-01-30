@@ -7,3 +7,5 @@ Tuntikirjanpito
 23.1 30min testejä muutama
 28.1 180min päivänpituuden laskumatikkaa.. 
 29.1 360min pään seinään hakkaamista kun ei osaa tehdä päivän pituuden laskevaa metodia
+30.1 180min -- || -- 
+31.1 300min testejä ja edellistä 
