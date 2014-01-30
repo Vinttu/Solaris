@@ -36,7 +36,15 @@ public class SijaintiTest {
     public void konstruktoriToimiiOikein() {
 
         Sijainti sijainti = new Sijainti(60, 70);
-        assertEquals("60 70", sijainti.toPlainString());
+        assertEquals(60, sijainti.getLeveyspiiri().intValue());
+        assertEquals(70, sijainti.getPituuspiiri().intValue());
+
+    }
+    @Test
+    public void toSTringToimiiOikein() {
+
+        Sijainti sijainti = new Sijainti(60, 70);
+        assertEquals("60 70", sijainti.toString());
 
     }
 
@@ -55,31 +63,54 @@ public class SijaintiTest {
     }
 
     @Test
-    public void koordinaattienVerifiointiAntaaFalseX() {
+    public void koordinaattienVerifiointiAntaaFalseXLiianSuurella() {
 
         double x = 92;
         assertEquals(false, Sijainti.onkoHyvaX(x));
     }
+    @Test
+    public void koordinaattienVerifiointiAntaaFalseXLiianPienella() {
+
+        double x = -92;
+        assertEquals(false, Sijainti.onkoHyvaX(x));
+    }
 
     @Test
-    public void koordinaattienVerifiointiAntaaFalseY() {
+    public void koordinaattienVerifiointiAntaaFalseYLiianPienella() {
 
         double y = -30;
         assertEquals(false, Sijainti.onkoHyvaY(y));
     }
-
     @Test
-    public void getLeveyspiiriToimii() {
+    public void koordinaattienVerifiointiAntaaFalseYLiianIsolla() {
 
-        Sijainti sijainti = new Sijainti(60, 70);
-        assertEquals("60", sijainti.getLeveyspiiri().toString());
+        double y = 380;
+        assertEquals(false, Sijainti.onkoHyvaY(y));
+    }
+    @Test
+    public void koordinaattienVerifiointiAntaaTrueYylarajalla() {
+
+        double y = 360;
+        assertEquals(true, Sijainti.onkoHyvaY(y));
+    }
+    @Test
+    public void koordinaattienVerifiointiAntaaTrueYalarajalla() {
+
+        double y = 0;
+        assertEquals(true, Sijainti.onkoHyvaY(y));
+    }
+    @Test
+    public void koordinaattienVerifiointiAntaaTrueXylarajalla() {
+
+        double y = 90;
+        assertEquals(true, Sijainti.onkoHyvaX(y));
+    }
+    @Test
+    public void koordinaattienVerifiointiAntaaTrueXalarajalla() {
+
+        double y = -90;
+        assertEquals(true, Sijainti.onkoHyvaX(y));
     }
 
-    @Test
-    public void getPituuspiiriToimii() {
-
-        Sijainti sijainti = new Sijainti(60, 70);
-        assertEquals("70", sijainti.getPituuspiiri().toString());
-    }
 
 }

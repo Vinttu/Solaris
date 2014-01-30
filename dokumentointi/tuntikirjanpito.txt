@@ -4,3 +4,6 @@ Tuntikirjanpito
 19.1 120min suunnittelu/taustatyö/koodauksen aloittaminen
 21.1 90min koodauksen kertaamista/koodausta
 22.1 300min koodausta ja testausta, samalla vanhan kertaamista
+23.1 30min testejä muutama
+28.1 180min päivänpituuden laskumatikkaa.. 
+29.1 360min pään seinään hakkaamista kun ei osaa tehdä päivän pituuden laskevaa metodia

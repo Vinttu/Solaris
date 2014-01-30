@@ -41,8 +41,8 @@ public class Sijainti {
         }
     }
 
-    public String toPlainString() {
-        return this.leveyspiiri.toString() + " " + this.pituuspiiri.toString();
+    public String toString() {
+        return this.leveyspiiri.intValue() + " " + this.pituuspiiri.intValue();
     }
 
 }
