@@ -1,88 +1,76 @@
 package solaris.laskurit;
 
-import static java.lang.Math.acos;
+import java.io.IOException;
 import solaris.paivamaara.Paivamaara;
 import solaris.sijainti.Sijainti;
-import java.math.BigDecimal;
+import java.util.Calendar;
+import solaris.sijainti.SijaintiLista;
 
 public class Laskuri {
 
+    /**
+     * Sijainti-olio Laskuri-olion sisällä.
+     */
     private Sijainti sijainti;
-    private String nimi;
+    /**
+     * Paivamaara-olio Laskuri-olion sisällä
+     */
     private Paivamaara paivamaara;
 
-    public Laskuri(Sijainti sijainti, String nimi, Paivamaara pvm) {
+    /**
+     * Konstruktori Laskuri-oliolle. Asettaa olion arvoiksi annetut parametrit,
+     * lisää Sijainti-olion ArrayListiin paikat ja tallentaa sen
+     * tekstitiedostoon.
+     *
+     * @see sijainti.SijaintiLista#lisaa(Sijainti)
+     * @see sijainti.SijaintiLista#tallennaTiedostoon(Sijainti)
+     * @param sijainti annettu Sijainti-olio
+     * @param pvm annettu Paivamaara-olio
+     * @throws IOException
+     */
+    public Laskuri(Sijainti sijainti, Paivamaara pvm) throws IOException {
 
         this.sijainti = sijainti;
-        this.nimi = nimi;
         this.paivamaara = pvm;
-
-    }
-    
-    public String getNimi(){
-    
-    return this.nimi;
-    }
-   
-
-    // Taistelen tämän metodin kanssa tosissaan enkä oikein voi tehdä mitään muuta ennen kuin saan tämän toimimaan. Toimii tällä hetkellä siinä mielessä, 
-    // että talvipäivänseisaus on lyhin päivä ja kesäpäivänseisaus on pisin päivä. Heittää kuitenkin oikeista arvoisa n. puolisen tuntia jostain ihmeen syystä.
-    // Kaava löytyy täältä. http://www.gandraxa.com/length_of_day.xml Tällä hetkellä virhe kasvaa poistuessa päiväntasaajalta. Jatkan asian selvittämistä.
-    
-    public double laskePaivanPituus() { 
-        double leveyspiiri = Math.toRadians(this.sijainti.getLeveyspiiri().intValue());
-        double paiviaSeisauksesta = this.paivamaara.getPaiviaTalvipaivanSeisauksesta();
-
-        double a = (90 - Math.cos(Math.PI * paiviaSeisauksesta / 182.625) * 23.439);
-        double m = 1 + (Math.tan(-leveyspiiri) * Math.cos(Math.toRadians(a)) / Math.sin(Math.toRadians(a)));
-//        System.out.println("m: " + m);
-
-        double b = Math.toDegrees(Math.acos((1 - m)));
-        double c = (b / 180) * 24;
-//        lisaaHamaraMukaan(c);
-//        c = muutaDesimaaleistaPois(c);
-        return c;
-
+        SijaintiLista.lisaa(this.sijainti);
+        SijaintiLista.tallennaTiedostoon(this.sijainti);
     }
 
-//    public double laskePaivanPituus3() { // Lyhyemmin sanottuna sama, mutta ei toimi
-//
-//        double leveyspiiri = Math.toRadians(this.sijainti.getLeveyspiiri().intValue());
-//        double paiviaSeisauksesta = this.paivamaara.getPaiviaTalvipaivanSeisauksesta();
-//
-//        double m = 1 - (Math.tan(leveyspiiri)) * (Math.tan((23.349 * Math.cos(0.0172 * paiviaSeisauksesta))));
-//        System.out.println("m: " + m);
-//        double b = (Math.toDegrees(acos(1 - m))) / 180;
-//        System.out.println("päivän pituus: " + b * 24);
-//
-//        return 0;
-//    }
+    /**
+     * Metodi laskee annetun Laskuri-olion attribuuteista sijainti ja paivamaara
+     * kyseisen päivän ja sijainnin päivän pituuden. Metodi ottaa huomioon
+     * karkausvuodet kutsumalla onkoKarkausvuosi-metodia ja muuttaa lopullisen
+     * tuntidesimaalimuodon luettavampaan muotoon kutsumalla
+     * muutaDesimaaleistaPois-metodia.
+     *
+     * @see solaris.paivamaara.Paivamaara#onkoKarkausvuosi(int)
+     * @see solaris.laskurit.Laskuri#muutaDesimaaleistaPois(double)
+     * @return String-muotoinen merkkijono päivän pituudesta sekunnin
+     * tarkkuudella
+     */
+    public String laskePaivanPituus() { // Nyt toimii! Karkausvuodetkin otettu huomioon. Virhe on enää minuutti tai pari! Jos sitä edes virheeksi enää voi kutsua. Puuh!
+        double leveyspiiri = this.sijainti.getLeveyspiiri();
 
-//    public double laskePaivanPituus2() { // Pidemmin sanottuna sama, mutta ei toimi
-//
-//        double leveyspiiri = this.sijainti.getLeveyspiiri().intValue();
-//        double paiviaSeisauksesta = this.paivamaara.getPaiviaTalvipaivanSeisauksesta();
-//
-//        double z = 90 - leveyspiiri - Math.cos(Math.toRadians(Math.PI * (paiviaSeisauksesta / 182.625))) * 23.439;
-//        System.out.println("z: " + z);
-//        double c = -leveyspiiri;
-//        System.out.println("c: " + c);
-//        double a = z - c;
-//        System.out.println("a: " + a);
-//        double d = 1 / Math.sin(Math.toRadians(a));
-//        System.out.println("d: " + d);
-//        double t = Math.cos(Math.toRadians(a)) * d;
-//        System.out.println("t: " + t);
-//        double m = 1 + Math.tan(Math.toRadians(c)) * t;
-//        System.out.println("m: " + m);
-//        double f = Math.toDegrees(Math.acos(1 - m));
-//        System.out.println("f: " + f);
-//        double b = f / 180;
-//        System.out.println("b: " + b);
-//        b = b * 24;
-//
-//        return b;
-//    }
+        double D = this.paivamaara.getPaiva().get(Calendar.DAY_OF_YEAR); // vuoden alusta 
+        int vuosi = this.paivamaara.getPaiva().get(Calendar.YEAR);
+        boolean onkoKarkausVuosi = Paivamaara.onkoKarkausvuosi(vuosi);
+        double lisattava = 0;
+        if (onkoKarkausVuosi == false) {
+            while (Paivamaara.onkoKarkausvuosi(vuosi) == false) {
+                lisattava = lisattava + 0.25;
+                vuosi = vuosi - 1;
+            }
+        }
+        D = D + lisattava;
+        double declinationAngleRad = Math.asin(Math.sin(Math.toRadians(23.349)) * Math.sin(Math.toRadians(360 / 365.0 * (D - 81))));
+        double hourAngleRad = Math.acos(((-0.0144857) - Math.sin(Math.toRadians(leveyspiiri)) * Math.sin(declinationAngleRad))
+                / (Math.cos(Math.toRadians(leveyspiiri)) * Math.cos(declinationAngleRad)));
+        double dayLength = 2 * Math.toDegrees(hourAngleRad) / 15.0;
+        String paivanPituus = muutaDesimaaleistaPois(dayLength);
+        return paivanPituus;
+
+    }
+
 //    private double lisaaHamaraMukaan(double m, double leveyspiiri, double paiviaSeisauksesta) {   // Tätä turha testata ennen kuin paivanpituus-metodi on 100% kunnossa.
 //
 //        double t = 6;
@@ -90,23 +78,46 @@ public class Laskuri {
 ////        System.out.println("h: "+ h);
 //        double v = leveyspiiri;
 ////        System.out.println("v:" + v);
-//        double h2 = Math.cos(Math.toRadians(v));
+//        double h2 = Math.toDegrees(Math.cos(v));
 ////        double h2 = 0.210208470532;
 ////        System.out.println("h2: "+h2);
-//        double i = (h / h2);
+//        double i = (Math.toDegrees(h) / h2);
 ////        System.out.println("i: " + i);
+////        System.out.println(m);
 //        double n = m + i;
 ////        System.out.println("n: "+n);
-//        double b2e = Math.toDegrees(acos((1 - n))) / 180;
+//        double b2e = acos((1 - n)) / Math.toRadians(180);
 ////        System.out.println("b2e: " +b2e );
-//        double yhteensa = b2e;
+//        double yhteensa = b2e *24;
 //
 //        return yhteensa;
 //
 //    }
-    public String toString() {
-        return " ";
+    /**
+     * Metodi muuttaa annetun desimaalimuotoisen tuntiarvon String-muotoiseksi
+     * merkkijonoksi, joka kertoo tunnit, minuutit ja sekunnit.
+     *
+     * @param desimaalimuoto Annettu desimaalimuotoinen tuntiarvo.
+     * @return Merkkijonoesitys tunneista, minuuteista ja sekunneista
+     */
+    private String muutaDesimaaleistaPois(double desimaalimuoto) {
 
+        double desimaalit = desimaalimuoto % 1;
+        int tunnit = (int) (desimaalimuoto - desimaalit);
+        double minuutit = desimaalit * 60;
+        double minuuttiDesimaalit = minuutit % 1;
+        minuutit = minuutit - minuuttiDesimaalit;
+        double sekunnit = minuuttiDesimaalit * 60;
+        double ylimaaraisetDesimaalit = sekunnit % 1;
+        sekunnit = sekunnit - ylimaaraisetDesimaalit;
+
+        return tunnit + "h " + (int) (minuutit) + "min " + (int) (sekunnit) + "s";
+
+    }
+    
+    public String toString(){
+    
+    return this.sijainti.getNimi() + ", " + this.paivamaara.toString();
     }
 
 }

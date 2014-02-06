@@ -9,3 +9,7 @@ Tuntikirjanpito
 29.1 360min pään seinään hakkaamista kun ei osaa tehdä päivän pituuden laskevaa metodia
 30.1 180min -- || -- 
 31.1 300min testejä ja edellistä 
+2.2 120min epätoivoa
+3.2 300min lisää epätoivoa ja lopulta rajatonta riemua
+4.2 300min Käyttöliittymän koodauksen kertausta (tai oikeastaan alkeita) ja käyttöliittymän koodausta
+6.2 240min Javadocin luonti, koodausta ja testausta

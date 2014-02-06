@@ -1,0 +1,14 @@
+Bangkok 13.723333
+Helsinki 60.170833
+Pariisi 48.856667
+Kairo 30.064722
+Kerava 70.0
+Turku 66.6
+Tornio 60.0
+Helsinki 60.0
+Kerava 70.0
+Turku 66.6
+Helsinki 60.0
+Helsinki 60.0
+Helsinki 60.1
+Tornio 60.0

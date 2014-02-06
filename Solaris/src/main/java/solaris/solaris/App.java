@@ -1,48 +1,69 @@
 package solaris.solaris;
-
-import static java.lang.Math.acos;
-import solaris.paivamaara.Paivamaara;
+import java.io.IOException;
 import solaris.laskurit.Laskuri;
-
-import java.math.BigDecimal;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.util.Date;
-
 import java.util.Scanner;
-import solaris.sijainti.Sijainti;
+import javax.swing.SwingUtilities;
+import kayttoliittyma.Kayttoliittyma;
+import solaris.sijainti.SijaintiLista;
 
 public class App {
 
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) throws ParseException, ClassNotFoundException, IOException {
 
-//        Scanner lukija = new Scanner(System.in);
-//        System.out.println("Anna haluamasi päivämärää muodossa dd.mm.yyyy");
-//        if (Paivamaara.onkoPaivamaaraHyva(lukija.nextLine()) == true){
-//        Paivamaara pvm = new Paivamaara(lukija.nextLine());}
-//        else System.out.println("Päivämäärä ei ollut mahdollinen.");
-//        
-//        System.out.println("Sijaintisi nimi?");
-//        String nimi = lukija.nextLine();
-////
-//        double x = 666;
-//        while (Sijainti.onkoHyvaX(x) == false) {
-//            System.out.println("Anna X-koordinaatti  kokonaislukuna tai desimaalimuodossa väliltä -90 - 90");
-//            x = lukija.nextDouble();
-//        }
+        Scanner lukija = new Scanner(System.in);
+//        String luettu = "";
+        SijaintiLista.lataaTiedostot();
+        SijaintiLista sijaintilista = new SijaintiLista();
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(sijaintilista);
+        SwingUtilities.invokeLater(kayttoliittyma);
+        // Tekstimuotoinen käyttöliittymä:
+//        while (true) {
+//            while (true) {
+//                System.out.println("Anna haluamasi päivämärää muodossa dd.mm.yyyy tai lopeta ohjelma antamalla komento 'lopeta'");
+//                luettu = lukija.nextLine();
+//                if (luettu.equals("lopeta")) {
+//                    return;
+//                }
 //
-//        double y = 666;
-//        while (Sijainti.onkoHyvaY(y) == false) {
-//            System.out.println("Anna Y-koordinaatti kokonaislukuna tai desimaalimuodossa väliltä 0-360");
-//            y = lukija.nextDouble();
+//                if (Paivamaara.onkoPaivaHyva(luettu, "dd.MM.yyyy") == true) {
+//                    break;
+//                }
+//                if (Paivamaara.onkoPaivaHyva(luettu, "dd.MM.yyyy") == false) {
+//                    System.out.println("Päivämäärä ei ollut oikeassa muodossa.");
+//                }
+//            }
+//
+//            Paivamaara pvm = new Paivamaara(luettu);
+//
+//            System.out.println("Sijaintisi nimi?");
+//            String nimi = lukija.nextLine();
+//            double x = 666;
+//            Sijainti kaytettavaSijainti = null;
+//            if (SijaintiLista.onkoListassaJo(nimi) == true) {
+//                kaytettavaSijainti = SijaintiLista.palautaOlemassaolevaSijainti(nimi);
+//            } else {
+//                while (true) {
+//                    System.out.println("Sijaintiasi ei ole tallennettu. Anna sijaintisi X-koordinaatti kokonaislukuna tai desimaalimuodossa väliltä [-90, 90]");
+//                    String luettuX = lukija.nextLine();
+//                    luettuX = luettuX.replaceAll(",", ".");
+//                    x = Double.parseDouble(luettuX);
+//
+//                    if (Sijainti.onkoHyvaX(x) == true) {
+//                        break;
+//                    }
+//                    if (Sijainti.onkoHyvaX(x) == false) {
+//                        System.out.println("Päivämäärä ei ollut oikeassa muodossa.");
+//
+//                    }
+//                }
+//                kaytettavaSijainti = new Sijainti(x, nimi);
+//            }
+//
+//            Laskuri laskuri = new Laskuri(kaytettavaSijainti, pvm);
+//            String pituus = laskuri.laskePaivanPituus();
+//
+//            System.out.println(pituus);
 //        }
-//        Laskuri laskuri = new Laskuri(new Sijainti(x, y), nimi, pvm);
-//        Laskuri laskuri = new Laskuri(new Sijainti(60.170833, 24.9375), "Helsinki", new Paivamaara("30.01.2014"));  //Virhe noin 30min    
-//        Laskuri laskuri = new Laskuri(new Sijainti(41.895556, 12.482222), "Rooma", new Paivamaara("30.01.2014"));   // Virhe noin 15min
-//        Laskuri laskuri = new Laskuri(new Sijainti(30.064722, 31.249444), "Kairo", new Paivamaara("30.01.2014"));  // Virhe noin 12min
-//        Laskuri laskuri = new Laskuri(new Sijainti(13.723333, 100.476111), "Bangkok", new Paivamaara("30.01.2014"));  // Virhe noin 7min
-//        double pituus = laskuri.laskePaivanPituus();
-//        System.out.println(pituus);
     }
-
 }

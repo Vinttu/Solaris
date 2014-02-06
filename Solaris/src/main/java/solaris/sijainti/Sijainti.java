@@ -1,48 +1,57 @@
 package solaris.sijainti;
 
-import java.math.BigDecimal;
+import java.io.Serializable;
 
-public class Sijainti {
+public class Sijainti implements Serializable {
 
-    
+    /**
+     * Sijainti-olion attribuutti leveyspiiri
+     */
+    private double leveyspiiri;
+    /**
+     * Sijainti-olion attribuutti nimi
+     */
+    private String nimi;
 
-    private BigDecimal leveyspiiri;
-    private BigDecimal pituuspiiri;
+    /**
+     * Sijainti-olion konstruktori, joka asettaaa olion leveyspiiri ja nimi
+     * -ominaisuuksiin parametrina annetut arvot.
+     *
+     * @param leveyspiiri Käyttäjän antama, ja onkoHyvaX-metodin tarkastama
+     * syöte.
+     *
+     * @param nimi Käyttäjän antama syöte sijainnin nimelle.
+     */
+    public Sijainti(double leveyspiiri, String nimi) {
 
-    public Sijainti(double leveyspiiri, double pituuspiiri) {
-
-        this.leveyspiiri = new BigDecimal(leveyspiiri);
-        this.pituuspiiri = new BigDecimal(pituuspiiri);
+        this.leveyspiiri = leveyspiiri;
+        this.nimi = nimi;
 
     }
 
-    public BigDecimal getLeveyspiiri() {
+    public double getLeveyspiiri() {
         return this.leveyspiiri;
     }
 
-    public BigDecimal getPituuspiiri() {
-        return this.pituuspiiri;
+    public String getNimi() {
+        return this.nimi;
     }
 
+    /**
+     * Metodi tarkistaa käyttäjän antaman leveyspiiri-arvon. Metodi palauttaa
+     * true, jos arvo on mahdollinen.
+     *
+     * @param x Käyttäjän antama syöte
+     *
+     * @return Totuusarvo leveyspiirin oikeellisuudesta.
+     */
     public static boolean onkoHyvaX(double x) {
-
+//
         if (x >= -90 && x <= 90) {
             return true;
         } else {
             return false;
         }
-    }
-    
-    public static boolean onkoHyvaY(double y) {
-        if (y >= 0 && y <= 360) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public String toString() {
-        return this.leveyspiiri.intValue() + " " + this.pituuspiiri.intValue();
     }
 
 }

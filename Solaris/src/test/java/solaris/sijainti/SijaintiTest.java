@@ -1,8 +1,5 @@
 package solaris.sijainti;
 
-
-
-
 import solaris.sijainti.Sijainti;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -35,16 +32,8 @@ public class SijaintiTest {
     @Test
     public void konstruktoriToimiiOikein() {
 
-        Sijainti sijainti = new Sijainti(60, 70);
-        assertEquals(60, sijainti.getLeveyspiiri().intValue());
-        assertEquals(70, sijainti.getPituuspiiri().intValue());
-
-    }
-    @Test
-    public void toSTringToimiiOikein() {
-
-        Sijainti sijainti = new Sijainti(60, 70);
-        assertEquals("60 70", sijainti.toString());
+        Sijainti sijainti = new Sijainti(60, "Helsinki");
+        assertEquals(60, sijainti.getLeveyspiiri(), Double.MIN_NORMAL);
 
     }
 
@@ -56,18 +45,12 @@ public class SijaintiTest {
     }
 
     @Test
-    public void koordinaattienVerifiointiAntaaTrueY() {
-
-        double y = 70;
-        assertEquals(true, Sijainti.onkoHyvaX(y));
-    }
-
-    @Test
     public void koordinaattienVerifiointiAntaaFalseXLiianSuurella() {
 
         double x = 92;
         assertEquals(false, Sijainti.onkoHyvaX(x));
     }
+
     @Test
     public void koordinaattienVerifiointiAntaaFalseXLiianPienella() {
 
@@ -76,41 +59,17 @@ public class SijaintiTest {
     }
 
     @Test
-    public void koordinaattienVerifiointiAntaaFalseYLiianPienella() {
-
-        double y = -30;
-        assertEquals(false, Sijainti.onkoHyvaY(y));
-    }
-    @Test
-    public void koordinaattienVerifiointiAntaaFalseYLiianIsolla() {
-
-        double y = 380;
-        assertEquals(false, Sijainti.onkoHyvaY(y));
-    }
-    @Test
-    public void koordinaattienVerifiointiAntaaTrueYylarajalla() {
-
-        double y = 360;
-        assertEquals(true, Sijainti.onkoHyvaY(y));
-    }
-    @Test
-    public void koordinaattienVerifiointiAntaaTrueYalarajalla() {
-
-        double y = 0;
-        assertEquals(true, Sijainti.onkoHyvaY(y));
-    }
-    @Test
     public void koordinaattienVerifiointiAntaaTrueXylarajalla() {
 
         double y = 90;
         assertEquals(true, Sijainti.onkoHyvaX(y));
     }
+
     @Test
     public void koordinaattienVerifiointiAntaaTrueXalarajalla() {
 
         double y = -90;
         assertEquals(true, Sijainti.onkoHyvaX(y));
     }
-
 
 }
