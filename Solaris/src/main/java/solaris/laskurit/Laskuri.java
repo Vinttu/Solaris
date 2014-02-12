@@ -1,9 +1,12 @@
 package solaris.laskurit;
 
 import java.io.IOException;
+import java.text.ParseException;
 import solaris.paivamaara.Paivamaara;
 import solaris.sijainti.Sijainti;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import solaris.sijainti.SijaintiLista;
 
 public class Laskuri {
@@ -28,12 +31,24 @@ public class Laskuri {
      * @param pvm annettu Paivamaara-olio
      * @throws IOException
      */
-    public Laskuri(Sijainti sijainti, Paivamaara pvm) throws IOException {
+    public Laskuri(Sijainti sijainti, Paivamaara pvm) {
 
         this.sijainti = sijainti;
         this.paivamaara = pvm;
-        SijaintiLista.lisaa(this.sijainti);
-        SijaintiLista.tallennaTiedostoon(this.sijainti);
+        try {
+            SijaintiLista.lisaa(this.sijainti);
+        } catch (IOException ex) {
+            Logger.getLogger(Laskuri.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            SijaintiLista.tallennaTiedostoon(this.sijainti);
+        } catch (IOException ex) {
+            Logger.getLogger(Laskuri.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public Laskuri() {
+
     }
 
     /**
@@ -71,28 +86,27 @@ public class Laskuri {
 
     }
 
-//    private double lisaaHamaraMukaan(double m, double leveyspiiri, double paiviaSeisauksesta) {   // Tätä turha testata ennen kuin paivanpituus-metodi on 100% kunnossa.
-//
-//        double t = 6;
-//        double h = Math.tan(Math.toRadians(t));
-////        System.out.println("h: "+ h);
-//        double v = leveyspiiri;
-////        System.out.println("v:" + v);
-//        double h2 = Math.toDegrees(Math.cos(v));
-////        double h2 = 0.210208470532;
-////        System.out.println("h2: "+h2);
-//        double i = (Math.toDegrees(h) / h2);
-////        System.out.println("i: " + i);
-////        System.out.println(m);
-//        double n = m + i;
-////        System.out.println("n: "+n);
-//        double b2e = acos((1 - n)) / Math.toRadians(180);
-////        System.out.println("b2e: " +b2e );
-//        double yhteensa = b2e *24;
-//
-//        return yhteensa;
-//
-//    }
+    public double laskePaivanPituusDesimaalina() {
+        double leveyspiiri = this.sijainti.getLeveyspiiri();
+
+        double D = this.paivamaara.getPaiva().get(Calendar.DAY_OF_YEAR); // vuoden alusta 
+        int vuosi = this.paivamaara.getPaiva().get(Calendar.YEAR);
+        boolean onkoKarkausVuosi = Paivamaara.onkoKarkausvuosi(vuosi);
+        double lisattava = 0;
+        if (onkoKarkausVuosi == false) {
+            while (Paivamaara.onkoKarkausvuosi(vuosi) == false) {
+                lisattava = lisattava + 0.25;
+                vuosi = vuosi - 1;
+            }
+        }
+        D = D + lisattava;
+        double declinationAngleRad = Math.asin(Math.sin(Math.toRadians(23.349)) * Math.sin(Math.toRadians(360 / 365.0 * (D - 81))));
+        double hourAngleRad = Math.acos(((-0.0144857) - Math.sin(Math.toRadians(leveyspiiri)) * Math.sin(declinationAngleRad))
+                / (Math.cos(Math.toRadians(leveyspiiri)) * Math.cos(declinationAngleRad)));
+        double dayLength = 2 * Math.toDegrees(hourAngleRad) / 15.0;
+        return dayLength;
+    }
+
     /**
      * Metodi muuttaa annetun desimaalimuotoisen tuntiarvon String-muotoiseksi
      * merkkijonoksi, joka kertoo tunnit, minuutit ja sekunnit.
@@ -114,10 +128,21 @@ public class Laskuri {
         return tunnit + "h " + (int) (minuutit) + "min " + (int) (sekunnit) + "s";
 
     }
-    
-    public String toString(){
-    
-    return this.sijainti.getNimi() + ", " + this.paivamaara.toString();
+
+    public String toString() {
+
+        return this.sijainti.getNimi() + ", " + this.paivamaara.toString();
+    }
+
+    public double getProsenttiMaksimista(){
+        Paivamaara kesapaivanSeisaus = new Paivamaara(("21.06." + String.valueOf(this.paivamaara.getPaiva().get(Calendar.YEAR))));
+        Laskuri maksimiLaskuri = new Laskuri(this.sijainti, kesapaivanSeisaus);
+        Laskuri nykyinenLaskuri = new Laskuri(this.sijainti, this.paivamaara);
+        double maksimi = maksimiLaskuri.laskePaivanPituusDesimaalina();
+        double nykyinen = nykyinenLaskuri.laskePaivanPituusDesimaalina();
+        double prosentti = (nykyinen / maksimi)*100;
+        prosentti = (double) Math.round(prosentti * 100) / 100;
+        return prosentti;
     }
 
 }

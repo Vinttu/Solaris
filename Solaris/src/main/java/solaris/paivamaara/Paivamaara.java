@@ -6,6 +6,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Paivamaara {
 
@@ -26,10 +28,14 @@ public class Paivamaara {
      * @param pvm String-muotoinen merkkijono päivämäärästä.
      * @throws ParseException
      */
-    public Paivamaara(String pvm) throws ParseException {
+    public Paivamaara(String pvm) {
 
         this.paivamaara = paivamaara.getInstance();
-        this.paivamaara.setTime(df.parse(pvm));
+        try {
+            this.paivamaara.setTime(df.parse(pvm));
+        } catch (ParseException ex) {
+            Logger.getLogger(Paivamaara.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
@@ -52,6 +58,40 @@ public class Paivamaara {
             paivia = monesPaivaVuodesta - 356;
         }
         return paivia;
+
+    }
+
+    public boolean lyheneeVaiPitenee(Paivamaara pvm) {
+        double paiviaTalvipaivanSeisauksesta = pvm.getPaiviaTalvipaivanSeisauksesta();
+        if (paiviaTalvipaivanSeisauksesta >= 364 && onkoKarkausvuosi(pvm.getPaiva().get(Calendar.YEAR)) == true) {
+            return true;
+        }
+        if (paiviaTalvipaivanSeisauksesta >= 182) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+    public int getPaiviaSeuraavaanSeisaukseen() {
+        int vuosi = this.paivamaara.get(Calendar.YEAR);
+        int monesPaivaVuodesta = this.paivamaara.get(Calendar.DAY_OF_YEAR);
+        int paiviaTalvipaivanSeisauksesta = 365 - (355 - monesPaivaVuodesta);
+        if (monesPaivaVuodesta > 355) {
+            paiviaTalvipaivanSeisauksesta = monesPaivaVuodesta - 355;
+        }
+        if (paiviaTalvipaivanSeisauksesta > 182 && onkoKarkausvuosi(vuosi) == true) {
+            return 365 - paiviaTalvipaivanSeisauksesta;
+        }
+        if (paiviaTalvipaivanSeisauksesta > 182) {
+            return 364 - paiviaTalvipaivanSeisauksesta;
+        }
+        if (onkoKarkausvuosi(vuosi) == true) {
+            return 183 - paiviaTalvipaivanSeisauksesta;
+        } else {
+            return 182 - paiviaTalvipaivanSeisauksesta;
+        }
 
     }
 
@@ -105,10 +145,10 @@ public class Paivamaara {
 
         return true;
     }
-    
-    public String toString(){
-    
-    return this.paivamaara.get(Calendar.DATE) + "." + (this.paivamaara.get(Calendar.MONTH)+1) + "." + this.paivamaara.get(Calendar.YEAR);
+
+    public String toString() {
+
+        return this.paivamaara.get(Calendar.DATE) + "." + (this.paivamaara.get(Calendar.MONTH) + 1) + "." + this.paivamaara.get(Calendar.YEAR);
     }
 
 }

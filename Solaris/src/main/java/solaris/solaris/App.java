@@ -4,7 +4,7 @@ import solaris.laskurit.Laskuri;
 import java.text.ParseException;
 import java.util.Scanner;
 import javax.swing.SwingUtilities;
-import kayttoliittyma.Kayttoliittyma;
+import kayttoliittyma.KayttoliittymaFrame;
 import solaris.sijainti.SijaintiLista;
 
 public class App {
@@ -12,11 +12,12 @@ public class App {
     public static void main(String[] args) throws ParseException, ClassNotFoundException, IOException {
 
         Scanner lukija = new Scanner(System.in);
-//        String luettu = "";
         SijaintiLista.lataaTiedostot();
         SijaintiLista sijaintilista = new SijaintiLista();
-        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(sijaintilista);
-        SwingUtilities.invokeLater(kayttoliittyma);
+        Laskuri laskuri = new Laskuri();
+        KayttoliittymaFrame kayttoliittyma = new KayttoliittymaFrame();
+        kayttoliittyma.setVisible(true);
+//        SwingUtilities.invokeLater(kayttoliittyma);
         // Tekstimuotoinen käyttöliittymä:
 //        while (true) {
 //            while (true) {

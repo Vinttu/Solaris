@@ -12,3 +12,4 @@ Helsinki 60.0
 Helsinki 60.0
 Helsinki 60.1
 Tornio 60.0
+Rovaniemi 67.0
