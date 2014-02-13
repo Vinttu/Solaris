@@ -140,5 +140,48 @@ public class PaivamaaraTest {
         assertEquals(true, Paivamaara.onkoPaivaHyva(pvm, "dd.MM.yyyy"));
 
     }
+    @Test
+    public void toimiikoLyheneeVaiPiteneeKunPitenee() throws ParseException {
+
+        Paivamaara pvm = new Paivamaara ("20.05.2014");
+        assertEquals(true, Paivamaara.lyheneeVaiPitenee(pvm));
+
+    }
+    @Test
+    public void toimiikoLyheneeVaiPiteneeKunLyhenee() throws ParseException {
+
+        Paivamaara pvm = new Paivamaara ("20.09.2014");
+        assertEquals(false, Paivamaara.lyheneeVaiPitenee(pvm));
+
+    }
+    @Test
+    public void toimiikoLyheneeVaiPiteneeKunKarkausVuosi() throws ParseException {
+
+        Paivamaara pvm = new Paivamaara ("22.05.2012");
+        assertEquals(true, Paivamaara.lyheneeVaiPitenee(pvm));
+
+    }
+    @Test
+    public void toimiikoLyheneeVaiPiteneeTalvellaKunKarkausVuosi() throws ParseException {
+
+        Paivamaara pvm = new Paivamaara ("22.12.2012");
+        assertEquals(true, Paivamaara.lyheneeVaiPitenee(pvm));
+
+    }
+    @Test
+    public void toimiikoPaiviaSeuraavaanSeisaukseenKevaalla() throws ParseException {
+
+        Paivamaara pvm = new Paivamaara ("22.05.2013");
+        assertEquals(30, pvm.getPaiviaSeuraavaanSeisaukseen());
+
+    }
+    @Test
+    public void toimiikoPaiviaSeuraavaanSeisaukseenSyksylla() throws ParseException {
+
+        Paivamaara pvm = new Paivamaara ("22.08.2012");
+        assertEquals(120, pvm.getPaiviaSeuraavaanSeisaukseen());
+
+    }
+  
 
 }

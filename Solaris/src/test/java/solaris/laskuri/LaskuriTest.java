@@ -108,5 +108,40 @@ public class LaskuriTest {
         assertEquals("12h 53min 37s", laskuri.laskePaivanPituus());
 
     }
+    @Test
+    public void paivanPituudenLaskuToimiiOikeinDesimaaleilla() throws ParseException, IOException {
+        Sijainti sijainti = new Sijainti(13.723333, "Bangkok");
+        Paivamaara paivamaara = new Paivamaara("07.07.2014");
+        Laskuri laskuri = new Laskuri(sijainti, paivamaara);
+        assertEquals(12.893839948210926, laskuri.laskePaivanPituusDesimaalina(), Double.MIN_VALUE);
+
+    }
+    @Test
+    public void paivanPituudenLaskuToimiiOikeinDesimaaleilla2() throws ParseException, IOException {
+        Sijainti sijainti = new Sijainti(60.1, "Helsinki");
+        Paivamaara paivamaara = new Paivamaara("06.03.2012");
+        Laskuri laskuri = new Laskuri(sijainti, paivamaara);
+        assertEquals(10.867520584105987, laskuri.laskePaivanPituusDesimaalina(), Double.MIN_VALUE);
+
+    }
+    @Test
+    public void prosenttiMaksimistaToimiiOikein() throws ParseException, IOException {
+        Sijainti sijainti = new Sijainti(60.1, "Helsinki");
+        Paivamaara paivamaara = new Paivamaara("06.03.2012");
+        Laskuri laskuri = new Laskuri(sijainti, paivamaara);
+        assertEquals(57.61, laskuri.getProsenttiMaksimista(), Double.MIN_VALUE);
+
+    }
+    @Test
+    public void prosenttiMaksimistaToimiiOikeinKunOn100() throws ParseException, IOException {
+        Sijainti sijainti = new Sijainti(60.170833, "Helsinki");
+        Paivamaara paivamaara = new Paivamaara("23.06.2012");
+        Laskuri laskuri = new Laskuri(sijainti, paivamaara);
+        assertEquals(99.94, laskuri.getProsenttiMaksimista(), Double.MIN_VALUE);
+
+    }
+    
+    
+    
 
 }

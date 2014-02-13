@@ -63,10 +63,10 @@ public class Laskuri {
      * @return String-muotoinen merkkijono päivän pituudesta sekunnin
      * tarkkuudella
      */
-    public String laskePaivanPituus() { // Nyt toimii! Karkausvuodetkin otettu huomioon. Virhe on enää minuutti tai pari! Jos sitä edes virheeksi enää voi kutsua. Puuh!
+    public String laskePaivanPituus() {
         double leveyspiiri = this.sijainti.getLeveyspiiri();
 
-        double D = this.paivamaara.getPaiva().get(Calendar.DAY_OF_YEAR); // vuoden alusta 
+        double D = this.paivamaara.getPaiva().get(Calendar.DAY_OF_YEAR);
         int vuosi = this.paivamaara.getPaiva().get(Calendar.YEAR);
         boolean onkoKarkausVuosi = Paivamaara.onkoKarkausvuosi(vuosi);
         double lisattava = 0;
@@ -77,15 +77,20 @@ public class Laskuri {
             }
         }
         D = D + lisattava;
-        double declinationAngleRad = Math.asin(Math.sin(Math.toRadians(23.349)) * Math.sin(Math.toRadians(360 / 365.0 * (D - 81))));
-        double hourAngleRad = Math.acos(((-0.0144857) - Math.sin(Math.toRadians(leveyspiiri)) * Math.sin(declinationAngleRad))
-                / (Math.cos(Math.toRadians(leveyspiiri)) * Math.cos(declinationAngleRad)));
-        double dayLength = 2 * Math.toDegrees(hourAngleRad) / 15.0;
-        String paivanPituus = muutaDesimaaleistaPois(dayLength);
+        double deklinaatioKulmaRad = Math.asin(Math.sin(Math.toRadians(23.349)) * Math.sin(Math.toRadians(360 / 365.0 * (D - 81))));
+        double tuntikulmaRad = Math.acos(((-0.0144857) - Math.sin(Math.toRadians(leveyspiiri)) * Math.sin(deklinaatioKulmaRad))
+                / (Math.cos(Math.toRadians(leveyspiiri)) * Math.cos(deklinaatioKulmaRad)));
+        double paivaPituus = 2 * Math.toDegrees(tuntikulmaRad) / 15.0;
+        String paivanPituus = muutaDesimaaleistaPois(paivaPituus);
         return paivanPituus;
 
     }
 
+    /**
+     * Metodi laskee päivän pituuden ja palauttaa sen desimaalimuodossa.
+     *
+     * @return Double-muotoinen tuntien desimaaliluku.
+     */
     public double laskePaivanPituusDesimaalina() {
         double leveyspiiri = this.sijainti.getLeveyspiiri();
 
@@ -100,11 +105,11 @@ public class Laskuri {
             }
         }
         D = D + lisattava;
-        double declinationAngleRad = Math.asin(Math.sin(Math.toRadians(23.349)) * Math.sin(Math.toRadians(360 / 365.0 * (D - 81))));
-        double hourAngleRad = Math.acos(((-0.0144857) - Math.sin(Math.toRadians(leveyspiiri)) * Math.sin(declinationAngleRad))
-                / (Math.cos(Math.toRadians(leveyspiiri)) * Math.cos(declinationAngleRad)));
-        double dayLength = 2 * Math.toDegrees(hourAngleRad) / 15.0;
-        return dayLength;
+        double deklinaatioKulmaRad = Math.asin(Math.sin(Math.toRadians(23.349)) * Math.sin(Math.toRadians(360 / 365.0 * (D - 81))));
+        double tuntikulmaRad = Math.acos(((-0.0144857) - Math.sin(Math.toRadians(leveyspiiri)) * Math.sin(deklinaatioKulmaRad))
+                / (Math.cos(Math.toRadians(leveyspiiri)) * Math.cos(deklinaatioKulmaRad)));
+        double paivaPituus = 2 * Math.toDegrees(tuntikulmaRad) / 15.0;
+        return paivaPituus;
     }
 
     /**
@@ -134,13 +139,21 @@ public class Laskuri {
         return this.sijainti.getNimi() + ", " + this.paivamaara.toString();
     }
 
-    public double getProsenttiMaksimista(){
+    /**
+     * Metodi laskee kuinka monta prosenttia kutsuvan Laskuri-olion
+     * Paivamaara-olion päivän pituus on kyseiselle sijainnille olevasta maksimi
+     * päivän pituudesta.
+     *
+     * @return Double-muotoinen kahteen desimaaliin pyöristetty prosenttiluku
+     * @throws ParseException
+     */
+    public double getProsenttiMaksimista() throws ParseException {
         Paivamaara kesapaivanSeisaus = new Paivamaara(("21.06." + String.valueOf(this.paivamaara.getPaiva().get(Calendar.YEAR))));
         Laskuri maksimiLaskuri = new Laskuri(this.sijainti, kesapaivanSeisaus);
         Laskuri nykyinenLaskuri = new Laskuri(this.sijainti, this.paivamaara);
         double maksimi = maksimiLaskuri.laskePaivanPituusDesimaalina();
         double nykyinen = nykyinenLaskuri.laskePaivanPituusDesimaalina();
-        double prosentti = (nykyinen / maksimi)*100;
+        double prosentti = (nykyinen / maksimi) * 100;
         prosentti = (double) Math.round(prosentti * 100) / 100;
         return prosentti;
     }

@@ -1,6 +1,7 @@
 package solaris.sijainti;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import org.junit.After;
@@ -86,6 +87,13 @@ public class SijaintiListaTest {
         SijaintiLista.lisaa(tornio);
         SijaintiLista.poista(tornio);
         assertEquals(false, SijaintiLista.onkoListassaJo("Tornio"));
+
+    }
+    @Test
+    public void toimiikoLataaTiedostot() throws IOException, FileNotFoundException, ClassNotFoundException {
+
+        SijaintiLista.lataaTiedostot();
+        assertEquals(true, SijaintiLista.onkoListassaJo("Hollola"));
 
     }
  

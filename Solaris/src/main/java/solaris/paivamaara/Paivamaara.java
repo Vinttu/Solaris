@@ -28,14 +28,10 @@ public class Paivamaara {
      * @param pvm String-muotoinen merkkijono päivämäärästä.
      * @throws ParseException
      */
-    public Paivamaara(String pvm) {
+    public Paivamaara(String pvm) throws ParseException {
 
-        this.paivamaara = paivamaara.getInstance();
-        try {
-            this.paivamaara.setTime(df.parse(pvm));
-        } catch (ParseException ex) {
-            Logger.getLogger(Paivamaara.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.paivamaara = Calendar.getInstance();
+        this.paivamaara.setTime(df.parse(pvm));
 
     }
 
@@ -61,7 +57,14 @@ public class Paivamaara {
 
     }
 
-    public boolean lyheneeVaiPitenee(Paivamaara pvm) {
+    /**
+     * Metodi palauttaa totuusarvon siitä onko annettu päivämäärä-olion
+     * päivämäärä ennen vai jälkeen kesäpäivänseisauksen.
+     *
+     * @param pvm Paivamaara-muotoinen olio
+     * @return Totuusarvo
+     */
+    public static boolean lyheneeVaiPitenee(Paivamaara pvm) {
         double paiviaTalvipaivanSeisauksesta = pvm.getPaiviaTalvipaivanSeisauksesta();
         if (paiviaTalvipaivanSeisauksesta >= 364 && onkoKarkausvuosi(pvm.getPaiva().get(Calendar.YEAR)) == true) {
             return true;
@@ -74,6 +77,13 @@ public class Paivamaara {
 
     }
 
+    /**
+     * Metodi laskee päiviä seuraavaan talvipäivänseisaukseen tai
+     * kesäpäivänseisaukseen. Laskettava seisaus riippuu siitä kumpi on
+     * lähempänä.
+     *
+     * @return Kokonaisluku, joka kertoo kuinka monta päivää seuraavaan seisaukseen.
+     */
     public int getPaiviaSeuraavaanSeisaukseen() {
         int vuosi = this.paivamaara.get(Calendar.YEAR);
         int monesPaivaVuodesta = this.paivamaara.get(Calendar.DAY_OF_YEAR);

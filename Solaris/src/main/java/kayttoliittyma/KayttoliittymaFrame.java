@@ -228,6 +228,7 @@ public class KayttoliittymaFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_paivamaaraKenttaActionPerformed
 
     private void laskeNappiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laskeNappiActionPerformed
+
         if (Paivamaara.onkoPaivaHyva(this.paivamaaraKentta.getText(), "dd.MM.yyyy") == false) {
             this.paivamaaraKentta.setText("Päivämäärä ei ollut mahdollinen");
         }
@@ -245,18 +246,18 @@ public class KayttoliittymaFrame extends javax.swing.JFrame {
         try {
             pvm = new Paivamaara(this.paivamaaraKentta.getText());
             kuunVaihe = new KuuLaskuri(pvm);
-        } catch (Exception e) {
+        } catch (ParseException e) {
             JOptionPane.showMessageDialog(this, "Virheellinen päivämäärä", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
         try {
             sijainti = new Sijainti(Double.parseDouble(this.leveysasteKentta.getText()), this.nimiKentta.getText());
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Virheellinen leveysaste", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
 
         try {
             laskuri = new Laskuri(new Sijainti(Double.parseDouble(this.leveysasteKentta.getText()), this.nimiKentta.getText()), pvm);
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Virheelliset arvot", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
 
@@ -267,9 +268,13 @@ public class KayttoliittymaFrame extends javax.swing.JFrame {
         } else {
             this.lyheneePiteneeKentta.setText("Päivä lyhenee vielä " + String.valueOf(pvm.getPaiviaSeuraavaanSeisaukseen()) + " päivää");
         }
-        this.paivaProsenttiKentta.setText("Päivän pituus on " + laskuri.getProsenttiMaksimista() + " prosenttia maksimista");
-        
-        this.kuunVaiheKentta.setText("Kuunvaihe on "+ kuunVaihe.kuunVaihe(pvm));
+        try {
+            this.paivaProsenttiKentta.setText("Päivän pituus on " + laskuri.getProsenttiMaksimista() + " prosenttia maksimista");
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(this, "Virheelliset arvot", "Virhe", JOptionPane.ERROR_MESSAGE);
+        }
+
+        this.kuunVaiheKentta.setText("Kuunvaihe on " + kuunVaihe.kuunVaihe(pvm));
 
 
     }//GEN-LAST:event_laskeNappiActionPerformed
