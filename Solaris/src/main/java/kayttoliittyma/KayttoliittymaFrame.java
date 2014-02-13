@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import solaris.laskurit.KuuLaskuri;
 import solaris.laskurit.Laskuri;
 import solaris.paivamaara.Paivamaara;
 import solaris.sijainti.Sijainti;
@@ -42,7 +43,7 @@ public class KayttoliittymaFrame extends javax.swing.JFrame {
         tulosKentta = new javax.swing.JTextField();
         tanaanNappi = new javax.swing.JButton();
         paivaProsenttiKentta = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        kuunVaiheKentta = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         lyheneePiteneeKentta = new javax.swing.JTextField();
 
@@ -111,7 +112,8 @@ public class KayttoliittymaFrame extends javax.swing.JFrame {
             }
         });
 
-        jTextField4.setText("jTextField4");
+        kuunVaiheKentta.setEditable(false);
+        kuunVaiheKentta.setBorder(null);
 
         lyheneePiteneeKentta.setEditable(false);
         lyheneePiteneeKentta.setBorder(null);
@@ -144,12 +146,12 @@ public class KayttoliittymaFrame extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addComponent(paivaProsenttiKentta)
-                                            .addComponent(lyheneePiteneeKentta, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE))
+                                            .addComponent(lyheneePiteneeKentta, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                                            .addComponent(kuunVaiheKentta))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(laskeNappi, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -195,10 +197,10 @@ public class KayttoliittymaFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lyheneePiteneeKentta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(kuunVaiheKentta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pack();
@@ -238,9 +240,11 @@ public class KayttoliittymaFrame extends javax.swing.JFrame {
         Paivamaara pvm = null;
         Sijainti sijainti = null;
         Laskuri laskuri = null;
+        KuuLaskuri kuunVaihe = null;
 
         try {
             pvm = new Paivamaara(this.paivamaaraKentta.getText());
+            kuunVaihe = new KuuLaskuri(pvm);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Virheellinen päivämäärä", "Virhe", JOptionPane.ERROR_MESSAGE);
         }
@@ -264,6 +268,8 @@ public class KayttoliittymaFrame extends javax.swing.JFrame {
             this.lyheneePiteneeKentta.setText("Päivä lyhenee vielä " + String.valueOf(pvm.getPaiviaSeuraavaanSeisaukseen()) + " päivää");
         }
         this.paivaProsenttiKentta.setText("Päivän pituus on " + laskuri.getProsenttiMaksimista() + " prosenttia maksimista");
+        
+        this.kuunVaiheKentta.setText("Kuunvaihe on "+ kuunVaihe.kuunVaihe(pvm));
 
 
     }//GEN-LAST:event_laskeNappiActionPerformed
@@ -321,7 +327,7 @@ public class KayttoliittymaFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField kuunVaiheKentta;
     private javax.swing.JButton laskeNappi;
     private javax.swing.JTextField leveysasteKentta;
     private javax.swing.JTextField lyheneePiteneeKentta;
