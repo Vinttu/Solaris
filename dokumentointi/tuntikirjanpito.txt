@@ -13,3 +13,5 @@ Tuntikirjanpito
 3.2 300min lisää epätoivoa ja lopulta rajatonta riemua
 4.2 300min Käyttöliittymän koodauksen kertausta (tai oikeastaan alkeita) ja käyttöliittymän koodausta
 6.2 240min Javadocin luonti, koodausta ja testausta
+11.2 120min peruskoodausta ja käyttöliittymää
+13.2 640min KuuLaskuri -luokka, testausta, javadocin päivittämistä ja jäljellä olevien hommien kartoittamista (TO DO -lista)
