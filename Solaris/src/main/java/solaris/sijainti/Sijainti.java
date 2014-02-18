@@ -45,7 +45,7 @@ public class Sijainti implements Serializable {
      *
      * @return Totuusarvo leveyspiirin oikeellisuudesta.
      */
-    public static boolean onkoHyvaX(double x) {
+    public static boolean onkoXHyvaLeveysasteeksi(double x) {
 //
         if (x >= -90 && x <= 90) {
             return true;

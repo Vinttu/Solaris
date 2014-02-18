@@ -11,7 +11,6 @@ public class App {
 
     public static void main(String[] args) throws ParseException, ClassNotFoundException, IOException {
 
-        Scanner lukija = new Scanner(System.in);
         SijaintiLista.lataaTiedostot();
         KayttoliittymaFrame kayttoliittyma = new KayttoliittymaFrame();
         kayttoliittyma.setVisible(true);

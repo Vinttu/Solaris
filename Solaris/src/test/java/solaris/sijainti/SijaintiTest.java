@@ -41,35 +41,35 @@ public class SijaintiTest {
     public void koordinaattienVerifiointiAntaaTrueX() {
 
         double x = 70;
-        assertEquals(true, Sijainti.onkoHyvaX(x));
+        assertEquals(true, Sijainti.onkoXHyvaLeveysasteeksi(x));
     }
 
     @Test
     public void koordinaattienVerifiointiAntaaFalseXLiianSuurella() {
 
         double x = 92;
-        assertEquals(false, Sijainti.onkoHyvaX(x));
+        assertEquals(false, Sijainti.onkoXHyvaLeveysasteeksi(x));
     }
 
     @Test
     public void koordinaattienVerifiointiAntaaFalseXLiianPienella() {
 
         double x = -92;
-        assertEquals(false, Sijainti.onkoHyvaX(x));
+        assertEquals(false, Sijainti.onkoXHyvaLeveysasteeksi(x));
     }
 
     @Test
     public void koordinaattienVerifiointiAntaaTrueXylarajalla() {
 
         double y = 90;
-        assertEquals(true, Sijainti.onkoHyvaX(y));
+        assertEquals(true, Sijainti.onkoXHyvaLeveysasteeksi(y));
     }
 
     @Test
     public void koordinaattienVerifiointiAntaaTrueXalarajalla() {
 
         double y = -90;
-        assertEquals(true, Sijainti.onkoHyvaX(y));
+        assertEquals(true, Sijainti.onkoXHyvaLeveysasteeksi(y));
     }
 
 }

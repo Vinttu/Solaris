@@ -320,10 +320,4 @@ Ypäjä 60.80416667
 Pariisi 48.856667
 Bangkok 13.723333
 Kairo 30.064722
-Helsinki 60.0
-Kerava 70.0
-Turku 66.6
-Helsinki 60.0
-Helsinki 60.1
-Helsinki 60.0
-Tornio 60.0
+

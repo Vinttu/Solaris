@@ -153,14 +153,15 @@ public class KayttoliittymaFrame extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addComponent(laskeNappi, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(tulosKentta, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(laskeNappi, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(tulosKentta, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, Short.MAX_VALUE))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(paivamaaraKentta, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(tanaanNappi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                        .addGap(0, 75, Short.MAX_VALUE)))
+                                        .addGap(0, 58, Short.MAX_VALUE)))
                                 .addContainerGap())))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,7 +234,7 @@ public class KayttoliittymaFrame extends javax.swing.JFrame {
             this.paivamaaraKentta.setText("Päivämäärä ei ollut mahdollinen");
         }
 
-        if (Sijainti.onkoHyvaX(Double.parseDouble(this.leveysasteKentta.getText())) == false) {
+        if (Sijainti.onkoXHyvaLeveysasteeksi(Double.parseDouble(this.leveysasteKentta.getText())) == false) {
             this.leveysasteKentta.setText("Leveysaste ei ollut mahdollinen");
 
         }
@@ -256,7 +257,7 @@ public class KayttoliittymaFrame extends javax.swing.JFrame {
         }
 
         try {
-            laskuri = new Laskuri(new Sijainti(Double.parseDouble(this.leveysasteKentta.getText()), this.nimiKentta.getText()), pvm);
+            laskuri = new Laskuri(sijainti, pvm);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Virheelliset arvot", "Virhe", JOptionPane.ERROR_MESSAGE);
         }

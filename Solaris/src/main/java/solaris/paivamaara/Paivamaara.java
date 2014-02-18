@@ -114,7 +114,6 @@ public class Paivamaara {
      */
     public static boolean onkoKarkausvuosi(int vuosi) {
 
-        boolean onKarkausVuosi = ((vuosi % 4 == 0) && (vuosi % 100 != 0) || (vuosi % 400 == 0));
 
         if (vuosi % 4 != 0) {
             return false;

@@ -52,11 +52,9 @@ public class Laskuri {
     }
 
     /**
-     * Metodi laskee annetun Laskuri-olion attribuuteista sijainti ja paivamaara
-     * kyseisen päivän ja sijainnin päivän pituuden. Metodi ottaa huomioon
-     * karkausvuodet kutsumalla onkoKarkausvuosi-metodia ja muuttaa lopullisen
-     * tuntidesimaalimuodon luettavampaan muotoon kutsumalla
-     * muutaDesimaaleistaPois-metodia.
+     * Metodi kutsuu laskePaivanPituusDesimaalina -metodia, jonka jälkeen se
+     * muuttaa sen palautusarvon String -muotoiseksi merkkijonoksi kutsumalla
+     * metodia muutaDesimaaleistaPois
      *
      * @see solaris.paivamaara.Paivamaara#onkoKarkausvuosi(int)
      * @see solaris.laskurit.Laskuri#muutaDesimaaleistaPois(double)
@@ -64,30 +62,17 @@ public class Laskuri {
      * tarkkuudella
      */
     public String laskePaivanPituus() {
-        double leveyspiiri = this.sijainti.getLeveyspiiri();
 
-        double D = this.paivamaara.getPaiva().get(Calendar.DAY_OF_YEAR);
-        int vuosi = this.paivamaara.getPaiva().get(Calendar.YEAR);
-        boolean onkoKarkausVuosi = Paivamaara.onkoKarkausvuosi(vuosi);
-        double lisattava = 0;
-        if (onkoKarkausVuosi == false) {
-            while (Paivamaara.onkoKarkausvuosi(vuosi) == false) {
-                lisattava = lisattava + 0.25;
-                vuosi = vuosi - 1;
-            }
-        }
-        D = D + lisattava;
-        double deklinaatioKulmaRad = Math.asin(Math.sin(Math.toRadians(23.349)) * Math.sin(Math.toRadians(360 / 365.0 * (D - 81))));
-        double tuntikulmaRad = Math.acos(((-0.0144857) - Math.sin(Math.toRadians(leveyspiiri)) * Math.sin(deklinaatioKulmaRad))
-                / (Math.cos(Math.toRadians(leveyspiiri)) * Math.cos(deklinaatioKulmaRad)));
-        double paivaPituus = 2 * Math.toDegrees(tuntikulmaRad) / 15.0;
+        double paivaPituus = laskePaivanPituusDesimaalina();
         String paivanPituus = muutaDesimaaleistaPois(paivaPituus);
         return paivanPituus;
 
     }
 
     /**
-     * Metodi laskee päivän pituuden ja palauttaa sen desimaalimuodossa.
+     * Metodi laskee annetun Laskuri-olion attribuuteista sijainti ja paivamaara
+     * kyseisen päivän pituuden. Metodi ottaa huomioon karkausvuodet kutsumalla
+     * onkoKarkausvuosi-metodia
      *
      * @return Double-muotoinen tuntien desimaaliluku.
      */
@@ -134,10 +119,7 @@ public class Laskuri {
 
     }
 
-    public String toString() {
 
-        return this.sijainti.getNimi() + ", " + this.paivamaara.toString();
-    }
 
     /**
      * Metodi laskee kuinka monta prosenttia kutsuvan Laskuri-olion
@@ -156,6 +138,11 @@ public class Laskuri {
         double prosentti = (nykyinen / maksimi) * 100;
         prosentti = (double) Math.round(prosentti * 100) / 100;
         return prosentti;
+    }
+    
+        public String toString() {
+
+        return this.sijainti.getNimi() + ", " + this.paivamaara.toString();
     }
 
 }
