@@ -89,13 +89,13 @@ public class SijaintiListaTest {
         assertEquals(false, SijaintiLista.onkoListassaJo("Tornio"));
 
     }
-    @Test
-    public void toimiikoLataaTiedostot() throws IOException, FileNotFoundException, ClassNotFoundException {
-
-        SijaintiLista.lataaTiedostot();
-        assertEquals(true, SijaintiLista.onkoListassaJo("Hollola"));
-
-    }
+//    @Test
+//    public void toimiikoLataaTiedostot() throws IOException, FileNotFoundException, ClassNotFoundException {
+//
+//        SijaintiLista.lataaTiedostot();
+//        assertEquals(true, SijaintiLista.onkoListassaJo("Hollola"));
+//
+//    }
  
 
 }

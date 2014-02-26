@@ -47,9 +47,6 @@ public class Laskuri {
         }
     }
 
-    public Laskuri() {
-
-    }
 
     /**
      * Metodi kutsuu laskePaivanPituusDesimaalina -metodia, jonka jälkeen se
@@ -91,9 +88,18 @@ public class Laskuri {
         }
         D = D + lisattava;
         double deklinaatioKulmaRad = Math.asin(Math.sin(Math.toRadians(23.349)) * Math.sin(Math.toRadians(360 / 365.0 * (D - 81))));
+
         double tuntikulmaRad = Math.acos(((-0.0144857) - Math.sin(Math.toRadians(leveyspiiri)) * Math.sin(deklinaatioKulmaRad))
                 / (Math.cos(Math.toRadians(leveyspiiri)) * Math.cos(deklinaatioKulmaRad)));
         double paivaPituus = 2 * Math.toDegrees(tuntikulmaRad) / 15.0;
+
+        if (Double.isNaN(paivaPituus) && deklinaatioKulmaRad > 0.40) {
+            paivaPituus = 24;
+        }
+        if (Double.isNaN(paivaPituus) && deklinaatioKulmaRad < 0.40) {
+            paivaPituus = 0;
+        }
+
         return paivaPituus;
     }
 
@@ -119,8 +125,6 @@ public class Laskuri {
 
     }
 
-
-
     /**
      * Metodi laskee kuinka monta prosenttia kutsuvan Laskuri-olion
      * Paivamaara-olion päivän pituus on kyseiselle sijainnille olevasta maksimi
@@ -139,8 +143,8 @@ public class Laskuri {
         prosentti = (double) Math.round(prosentti * 100) / 100;
         return prosentti;
     }
-    
-        public String toString() {
+
+    public String toString() {
 
         return this.sijainti.getNimi() + ", " + this.paivamaara.toString();
     }

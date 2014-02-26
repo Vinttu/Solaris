@@ -15,3 +15,6 @@ Tuntikirjanpito
 6.2 240min Javadocin luonti, koodausta ja testausta
 11.2 120min peruskoodausta ja käyttöliittymää
 13.2 640min KuuLaskuri -luokka, testausta, javadocin päivittämistä ja jäljellä olevien hommien kartoittamista (TO DO -lista)
+14. 2 - 20.2 180min Koodin siivoamista, poikkeustapauksien etsintää ja demovalmiuden säätöä
+25.2 120min Loppupalautuksen muistilistan läpikäymistä
+26.2 120min Uusi luokkakaavio, palautukseen tarvittavat dokumentit ja hyvin epätoivoista yritystä saada .jar -tiedosto toimimaan.

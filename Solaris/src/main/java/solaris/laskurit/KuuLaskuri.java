@@ -5,10 +5,21 @@ import solaris.paivamaara.Paivamaara;
 
 public class KuuLaskuri {
 
+    /**
+     * Integer-luokan päivää kuvaava kokonaisluku.
+     */
     private int paiva;
+    /**
+     * Integer-luokan kuukautta kuvaava kokonaisluku.
+     */
     private int kuukausi;
+    /**
+     * Integer-luokan vuotta kuvaava kokonaisluku.
+     */
     private int vuosi;
-    
+    /**
+     * String-muotoiset kuun vaiheet taulukossa.
+     */
     private static final String kuunVaiheNimi[] = {
         "uusikuu",
         "kasvava kuunsirppi",
@@ -18,9 +29,17 @@ public class KuuLaskuri {
         "vähenevä täysikuu",
         "puolikuu",
         "vähenevä puolikuu"};
-    
+    /**
+     * Päivämäärä-muotoinen olio paivamaara.
+     */
     private Paivamaara paivamaara;
 
+    /**
+     * KuuLaskuri-luokan konstruktori, joka purkaa Päivämäärä-olion ominaisuudet erillisiksi
+     * Integer-olioiksi.
+     *
+     * @param paivamaara Metodia kutsuttaessa annettu Paivamaara-muotoinen olio.
+     */
     public KuuLaskuri(Paivamaara paivamaara) {
         this.paivamaara = paivamaara;
         this.paiva = this.paivamaara.getPaiva().get(Calendar.DATE);
@@ -28,7 +47,13 @@ public class KuuLaskuri {
         this.vuosi = this.paivamaara.getPaiva().get(Calendar.YEAR);
     }
 
-    public String kuunVaihe(Paivamaara paivamaara) {
+    /**
+     * Metodi laskee olion päivämäärä-attribuutista kuun vaiheen kahdeksasta
+     * vaihtoehdosta ja palauttaa sen String-muotoisena merkkijonona.
+     *
+     * @return kuunVaiheTekstina String-muotoinen merkkijono kuun vaiheesta.
+     */
+    public String kuunVaihe() {
 
         int vaihe;
         int vuosisata;
@@ -36,8 +61,8 @@ public class KuuLaskuri {
         int paivaVuodessa;
         int kuunNumero;
 
-        paivaVuodessa = paivamaara.getPaiva().get(Calendar.DAY_OF_YEAR);
-        
+        paivaVuodessa = this.paivamaara.getPaiva().get(Calendar.DAY_OF_YEAR);
+
         if ((this.kuukausi > 2) && Paivamaara.onkoKarkausvuosi(this.vuosi) == true) {
             paivaVuodessa++;
         }
@@ -54,8 +79,8 @@ public class KuuLaskuri {
             vuodenAlussa++;
         }
         vaihe = (((((paivaVuodessa + vuodenAlussa) * 6) + 11) % 177) / 22) & 7;
-
-        return this.kuunVaiheNimi[vaihe];
+        String kuunVaiheTekstina = this.kuunVaiheNimi[vaihe];
+        return kuunVaiheTekstina;
     }
 
 }
