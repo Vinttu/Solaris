@@ -80,15 +80,7 @@ public class SijaintiListaTest {
         
     }
 
-    @Test
-    public void poistaaArrayLististaArvon() throws IOException {
 
-        Sijainti tornio = new Sijainti(60, "Tornio");
-        SijaintiLista.lisaa(tornio);
-        SijaintiLista.poista(tornio);
-        assertEquals(false, SijaintiLista.onkoListassaJo("Tornio"));
-
-    }
 //    @Test
 //    public void toimiikoLataaTiedostot() throws IOException, FileNotFoundException, ClassNotFoundException {
 //

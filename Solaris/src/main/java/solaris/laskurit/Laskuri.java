@@ -25,8 +25,6 @@ public class Laskuri {
      * lisää Sijainti-olion ArrayListiin paikat ja tallentaa sen
      * tekstitiedostoon.
      *
-     * @see sijainti.SijaintiLista#lisaa(Sijainti)
-     * @see sijainti.SijaintiLista#tallennaTiedostoon(Sijainti)
      * @param sijainti annettu Sijainti-olio
      * @param pvm annettu Paivamaara-olio
      * @throws IOException
@@ -40,11 +38,11 @@ public class Laskuri {
         } catch (IOException ex) {
             Logger.getLogger(Laskuri.class.getName()).log(Level.SEVERE, null, ex);
         }
-        try {
-            SijaintiLista.tallennaTiedostoon(this.sijainti);
-        } catch (IOException ex) {
-            Logger.getLogger(Laskuri.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            SijaintiLista.tallennaTiedostoon(this.sijainti);
+//        } catch (IOException ex) {
+//            Logger.getLogger(Laskuri.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
 

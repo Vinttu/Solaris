@@ -1,8 +1,6 @@
 package solaris.sijainti;
 
-import java.io.Serializable;
-
-public class Sijainti implements Serializable {
+public class Sijainti {
 
     /**
      * Sijainti-olion attribuutti leveyspiiri

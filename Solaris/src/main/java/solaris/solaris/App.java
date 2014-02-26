@@ -1,9 +1,6 @@
 package solaris.solaris;
 import java.io.IOException;
-import solaris.laskurit.Laskuri;
 import java.text.ParseException;
-import java.util.Scanner;
-import javax.swing.SwingUtilities;
 import kayttoliittyma.KayttoliittymaFrame;
 import solaris.sijainti.SijaintiLista;
 
