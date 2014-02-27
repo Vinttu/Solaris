@@ -1,20 +1,21 @@
 Tuntikirjanpito
 
-10.1 75min suunnittelu/tehtävä 1
-19.1 120min suunnittelu/taustatyö/koodauksen aloittaminen
+10.1 75min suunnittelu/tehtï¿½vï¿½ 1
+19.1 120min suunnittelu/taustatyï¿½/koodauksen aloittaminen
 21.1 90min koodauksen kertaamista/koodausta
 22.1 300min koodausta ja testausta, samalla vanhan kertaamista
-23.1 30min testejä muutama
-28.1 180min päivänpituuden laskumatikkaa.. 
-29.1 360min pään seinään hakkaamista kun ei osaa tehdä päivän pituuden laskevaa metodia
+23.1 30min testejï¿½ muutama
+28.1 180min pï¿½ivï¿½npituuden laskumatikkaa.. 
+29.1 360min pï¿½ï¿½n seinï¿½ï¿½n hakkaamista kun ei osaa tehdï¿½ pï¿½ivï¿½n pituuden laskevaa metodia
 30.1 180min -- || -- 
-31.1 300min testejä ja edellistä 
-2.2 120min epätoivoa
-3.2 300min lisää epätoivoa ja lopulta rajatonta riemua
-4.2 300min Käyttöliittymän koodauksen kertausta (tai oikeastaan alkeita) ja käyttöliittymän koodausta
+31.1 300min testejï¿½ ja edellistï¿½ 
+2.2 120min epï¿½toivoa
+3.2 300min lisï¿½ï¿½ epï¿½toivoa ja lopulta rajatonta riemua
+4.2 300min Kï¿½yttï¿½liittymï¿½n koodauksen kertausta (tai oikeastaan alkeita) ja kï¿½yttï¿½liittymï¿½n koodausta
 6.2 240min Javadocin luonti, koodausta ja testausta
-11.2 120min peruskoodausta ja käyttöliittymää
-13.2 640min KuuLaskuri -luokka, testausta, javadocin päivittämistä ja jäljellä olevien hommien kartoittamista (TO DO -lista)
-14. 2 - 20.2 180min Koodin siivoamista, poikkeustapauksien etsintää ja demovalmiuden säätöä
-25.2 120min Loppupalautuksen muistilistan läpikäymistä
-26.2 120min Uusi luokkakaavio, palautukseen tarvittavat dokumentit ja hyvin epätoivoista yritystä saada .jar -tiedosto toimimaan.
+11.2 120min peruskoodausta ja kï¿½yttï¿½liittymï¿½ï¿½
+13.2 640min KuuLaskuri -luokka, testausta, javadocin pï¿½ivittï¿½mistï¿½ ja jï¿½ljellï¿½ olevien hommien kartoittamista (TO DO -lista)
+14. 2 - 20.2 180min Koodin siivoamista, poikkeustapauksien etsintï¿½ï¿½ ja demovalmiuden sï¿½ï¿½tï¿½ï¿½
+25.2 120min Loppupalautuksen muistilistan lï¿½pikï¿½ymistï¿½
+26.2 120min Uusi luokkakaavio, palautukseen tarvittavat dokumentit ja hyvin epï¿½toivoista yritystï¿½ saada .jar -tiedosto toimimaan.
+27.2 30min Omassa Windows 8 -koneessa jotain hÃ¤ikkÃ¤Ã¤, sain laitoksen koneella .jarin toimimaan, joskin ei mallin mukaisessa kansiorakenteessa :(
